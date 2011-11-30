@@ -1,0 +1,36 @@
+<% title "Download" %>
+
+<p>
+  <strong>Uri:</strong>
+  <%= @download.uri %>
+</p>
+<p>
+  <strong>Gid:</strong>
+  <%= @download.gid %>
+</p>
+<p>
+  <strong>Status:</strong>
+  <%= @download.status %>
+</p>
+<p>
+  <strong>Options:</strong>
+  <%= @download.options %>
+</p>
+<p>
+  <strong>Completed At:</strong>
+  <%= @download.completed_at %>
+</p>
+<p>
+  <strong>Error:</strong>
+  <%= @download.error %>
+</p>
+<p>
+  <strong>Info:</strong>
+  <%= @download.info %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_download_path(@download) %> |
+  <%= link_to "Destroy", @download, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", downloads_path %>
+</p>

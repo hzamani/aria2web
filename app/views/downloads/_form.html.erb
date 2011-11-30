@@ -1,0 +1,32 @@
+<%= form_for @download do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :uri %><br />
+    <%= f.text_field :uri %>
+  </p>
+  <p>
+    <%= f.label :gid %><br />
+    <%= f.text_field :gid %>
+  </p>
+  <p>
+    <%= f.label :status %><br />
+    <%= f.text_field :status %>
+  </p>
+  <p>
+    <%= f.label :options %><br />
+    <%= f.text_field :options %>
+  </p>
+  <p>
+    <%= f.label :completed_at %><br />
+    <%= f.datetime_select :completed_at %>
+  </p>
+  <p>
+    <%= f.label :error %><br />
+    <%= f.text_field :error %>
+  </p>
+  <p>
+    <%= f.label :info %><br />
+    <%= f.text_area :info %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>

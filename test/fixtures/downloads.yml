@@ -1,0 +1,17 @@
+one:
+  uri: MyString
+  gid: MyString
+  status: MyString
+  options: MyString
+  completed_at: 2011-11-30 16:03:55
+  error: MyString
+  info: MyText
+
+two:
+  uri: MyString
+  gid: MyString
+  status: MyString
+  options: MyString
+  completed_at: 2011-11-30 16:03:55
+  error: MyString
+  info: MyText
