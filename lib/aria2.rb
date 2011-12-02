@@ -6,5 +6,13 @@ class Aria2
     def this_session
       session["sessionId"]
     end
+    
+    def limit
+      change_global_options Aria2Config.get(:limit_options, {})
+    end
+
+    def unlimit
+      change_global_options Aria2Config.get(:unlimit_options, {})
+    end
   end
 end

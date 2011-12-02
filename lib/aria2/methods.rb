@@ -1,5 +1,8 @@
 class Aria2
   class << self
+    # These are default aria2c rpc methods
+    # for more info look at #rpc section on aria2c manpage
+    
     def addUri uris, options={}
       uris = [uris] if uris.class == String
       server.call "aria2.addUri", uris, options
@@ -83,7 +86,7 @@ class Aria2
     def changeOption gid, options
       server.call "aria2.changeOption", gid, options
     end
-    alias :set_options :changeOption
+    alias :change_options :changeOption
 
     def getGlobalOption
       server.call "aria2.getGlobalOption"
@@ -93,7 +96,7 @@ class Aria2
     def changeGlobalOption options
       server.call "aria2.changeGlobalOption", options
     end
-    alias :set_global_options :changeGlobalOption
+    alias :change_global_options :changeGlobalOption
 
     def getGlobalStat
       server.call "aria2.getGlobalStat"

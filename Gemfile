@@ -5,6 +5,7 @@ gem 'sqlite3'
 gem 'jquery-rails'
 gem 'therubyracer'
 gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'parseconfig'
 
 group :assets do
   gem 'sass-rails',   '~> 3.1.5'
