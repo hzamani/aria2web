@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(:version => 20111209142340) do
     t.string   "error"
     t.text     "info"
     t.boolean  "got",           :default => false
+    t.boolean  "keep",          :default => false
     t.boolean  "removed",       :default => false
     t.boolean  "files_removed", :default => false
     t.datetime "created_at"

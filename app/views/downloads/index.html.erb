@@ -16,7 +16,7 @@
       <td><%= download.completed_at %></td>
       <td><%= download.error %></td>
       <td>
-      <% links_for(download).each do |link| -%>
+      <% [*links_for(download)].each do |link| -%>
         <%= link %>
       <% end -%>
       </td>

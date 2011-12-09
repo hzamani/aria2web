@@ -27,7 +27,13 @@ class Download < ActiveRecord::Base
   
   def got?() got end
   def toggle_got
-    self.got = !got?
+    self.got = !got
+    save
+  end
+  
+  def keep?() keep end
+  def toggle_keep
+    self.keep = !keep
     save
   end
   

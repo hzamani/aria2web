@@ -47,19 +47,32 @@ class DownloadsController < ApplicationController
     render json: status
   end
   
-  def add
-    resault = DownloadManager.add Download.find(params[:id])
-
+  def add   () send_command params, message: "Added"   end
+  def pause () send_command params, message: "Paused"  end
+  def resume() send_command params, message: "Resumed" end
+  def stop  () send_command params, message: "Stopped", command: :remove end
+  
+  def send_command params, options={}
+    options[:command] ||= params[:action]
+    resault = DownloadManager.send options[:command], Download.find(params[:id])
+    
     respond_with(resault) do |format|
-      format.html { redirect_to downloads_url, notice: (resault ? "Added" : "Error") }
+      format.html { redirect_to downloads_url, notice: resault }
     end
   end
   
-  def got
-    resault = Download.find(params[:id]).toggle_got
+  def got  () send_download_command params, :toggle_got,  message: "got toggled"  end
+  def keep () send_download_command params, :toggle_keep, message: "keep toggled" end
+  
+  def send_download_command params, command, options={}
+    command           ||= params[:action]
+    options[:message] ||= "#{:command} done"
+    options[:error]   ||= "Error"
+    
+    resault = Download.find(params[:id]).send command
 
     respond_with(resault) do |format|
-      format.html { redirect_to downloads_url, notice: (resault ? "Toggled" : "Error") }
+      format.html { redirect_to downloads_url, notice: (resault ? options[:message] : options[:error]) }
     end
   end
 end
