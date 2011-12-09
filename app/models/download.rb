@@ -1,11 +1,14 @@
 class Download < ActiveRecord::Base
-  attr_accessible :uri
+  attr_accessible :uri, :category_id
+  
+  belongs_to :category
   
   serialize :options
   serialize :files
   serialize :info
   
-  validates :uri, presence: true, uniqueness: true
+  validates :uri,      presence: true, uniqueness: true
+  validates :category, presence: true
   
   scope :removed,     where(removed: true)
   scope :all_exist,   where(removed: false)

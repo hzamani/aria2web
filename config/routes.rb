@@ -1,4 +1,6 @@
 Aria2web::Application.routes.draw do
+  resources :categories
+
   resources :downloads do
     get 'add',  on: :member
     get 'got',  on: :member

@@ -22,6 +22,10 @@ class DownloadsController < ApplicationController
       render action: 'new'
     end
   end
+  
+  def edit
+    @download = Download.find params[:id]
+  end
 
   def update
     @download = Download.find params[:id]

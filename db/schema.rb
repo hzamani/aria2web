@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111130123356) do
+ActiveRecord::Schema.define(:version => 20111209142340) do
+
+  create_table "categories", :force => true do |t|
+    t.string   "name"
+    t.integer  "parent_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "downloads", :force => true do |t|
     t.string   "uri"
@@ -28,6 +35,7 @@ ActiveRecord::Schema.define(:version => 20111130123356) do
     t.boolean  "files_removed", :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "category_id"
   end
 
 end
