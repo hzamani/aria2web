@@ -1,11 +1,10 @@
-class Aria2
+module Aria2
   class << self
     # These are default aria2c rpc methods
     # for more info look at #rpc section on aria2c manpage
     
     def addUri uris, options={}
-      uris = [uris] if uris.class == String
-      server.call "aria2.addUri", uris, options
+      server.call "aria2.addUri", [*uris], options
     end
     alias :add :addUri
 
@@ -57,7 +56,7 @@ class Aria2
     end
     alias :servers :getServers
 
-    def tellActive keys=nil
+    def tellActive keys=[]
       server.call "aria2.tellActive", keys
     end
     alias :active :tellActive

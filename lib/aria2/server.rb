@@ -1,15 +1,15 @@
 require 'xmlrpc/client'
 
-class Aria2
+module Aria2
   class << self
     def client
       # This method creates and returns a rpc-client to server spesifaild in config file
       XMLRPC::Client.new3({
         path:     "/rpc",
-        host:     Aria2Config.get(:host, "localhost"),
-        port:     Aria2Config.get(:rpc_listen_port, "6800"),
-        user:     Aria2Config.get(:rpc_user),
-        password: Aria2Config.get(:rpc_passwd)
+        host:     Aria2Config.fetch(:host, "localhost"),
+        port:     Aria2Config.fetch(:rpc_listen_port, "6800"),
+        user:     Aria2Config.fetch(:rpc_user),
+        password: Aria2Config.fetch(:rpc_passwd)
       })
     end
     
