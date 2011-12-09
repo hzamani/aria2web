@@ -5,9 +5,14 @@ class CreateDownloads < ActiveRecord::Migration
       t.string   :gid
       t.string   :status
       t.string   :options
+      t.string   :files
+      t.datetime :started_at
       t.datetime :completed_at
       t.string   :error
       t.text     :info
+      t.boolean  :got,           default: false
+      t.boolean  :removed,       default: false
+      t.boolean  :files_removed, default: false
       
       t.timestamps
     end
