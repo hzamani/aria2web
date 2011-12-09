@@ -1,8 +1,7 @@
-<%= form_for @download do |f| %>
-  <%= f.error_messages %>
-  <p>
-    <%= f.label :uri %><br />
-    <%= f.text_field :uri %>
-  </p>
-  <p><%= f.submit %></p>
-<% end %>
+<%= semantic_form_for @download do |f| -%>
+  <%= f.inputs do -%>
+    <%= f.input :uri %>
+    <%= f.input :category, collection: Category.collection %>
+  <% end -%>
+  <%= f.buttons %>
+<% end -%>
