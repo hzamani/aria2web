@@ -1,7 +1,8 @@
 Aria2web::Application.routes.draw do
   resources :downloads do
-    get 'add', on: :member
-    get 'got', on: :member
+    get 'add',  on: :member
+    get 'got',  on: :member
+    get 'stat', on: :member, format: :json
   end
 
   # The priority is based upon order of creation:

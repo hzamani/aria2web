@@ -2,7 +2,7 @@ class DownloadsController < ApplicationController
   respond_to :html, :json
   
   def index
-    Download.update_status
+    DownloadManager.update_status_all
     respond_with(@downloads = Download.all_ordered)
   end
 
@@ -38,16 +38,24 @@ class DownloadsController < ApplicationController
     redirect_to downloads_url, notice: "Successfully destroyed download."
   end
   
-  def add() common_action params              end
-  def got() common_action params, :toggle_got end
+  def stat
+    status = DownloadManager.status Download.find(params[:id])
+    render json: status
+  end
+  
+  def add
+    resault = DownloadManager.add Download.find(params[:id])
 
-  def common_action params, action=nil
-    @download = Download.find params[:id]
-    action = params[:action] if action.nil?
-    res = @download.send action
+    respond_with(resault) do |format|
+      format.html { redirect_to downloads_url, notice: (resault ? "Added" : "Error") }
+    end
+  end
+  
+  def got
+    resault = Download.find(params[:id]).toggle_got
 
-    respond_with(@download) do |format|
-      format.html { redirect_to downloads_url, notice: (res ? "#{params[:action]} done" : "Error") }
+    respond_with(resault) do |format|
+      format.html { redirect_to downloads_url, notice: (resault ? "Toggled" : "Error") }
     end
   end
 end
