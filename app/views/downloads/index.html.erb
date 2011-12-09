@@ -2,26 +2,24 @@
 
 <table>
   <tr>
-    <th>Uri</th>
+    <th>Name</th>
     <th>Gid</th>
     <th>Status</th>
-    <th>Options</th>
     <th>Completed At</th>
     <th>Error</th>
-    <th>Info</th>
   </tr>
   <% for download in @downloads %>
     <tr>
-      <td><%= download.uri %></td>
+      <td><%= download.name %></td>
       <td><%= download.gid %></td>
       <td><%= download.status %></td>
-      <td><%= download.options %></td>
       <td><%= download.completed_at %></td>
       <td><%= download.error %></td>
-      <td><%= download.info %></td>
-      <td><%= link_to "Show", download %></td>
-      <td><%= link_to "Edit", edit_download_path(download) %></td>
-      <td><%= link_to "Destroy", download, :confirm => 'Are you sure?', :method => :delete %></td>
+      <td>
+      <% links_for(download).each do |link| -%>
+        <%= link %>
+      <% end -%>
+      </td>
     </tr>
   <% end %>
 </table>

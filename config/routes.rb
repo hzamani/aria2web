@@ -1,5 +1,8 @@
 Aria2web::Application.routes.draw do
-  resources :downloads
+  resources :downloads do
+    get 'add', on: :member
+    get 'got', on: :member
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
