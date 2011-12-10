@@ -2,21 +2,23 @@ class Download < ActiveRecord::Base
   attr_accessible :uri, :category_id
   
   belongs_to :category
+  belongs_to :user
   
   serialize :options
   serialize :files
   serialize :info
   
   validates :uri,      presence: true, uniqueness: true
+  validates :user,     presence: true
   validates :category, presence: true
   
   scope :removed,     where(removed: true)
   scope :all_exist,   where(removed: false)
-  scope :all_ordered, all_exist.order(:status, :completed_at, :created_at)
+  scope :all_ordered, all_exist.order("status, completed_at DESC, created_at DESC")
   scope :to_add,      all_exist.where(status: :new)
   scope :to_check,    all_exist.where(status: [:added, :active])
   scope :to_clean,    all_exist.where(got:    true)
-  scope :completed,   all_exist.where(status: :completed).order(:completed_at)
+  scope :completed,   all_exist.where(status: :completed).order("completed_at DESC")
   
   before_create do
     self[:status]  = "new"

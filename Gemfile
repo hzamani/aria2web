@@ -7,6 +7,7 @@ gem 'therubyracer'
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'parseconfig'
 gem 'formtastic'
+gem 'devise'
 
 group :assets do
   gem 'sass-rails',   '~> 3.1.5'

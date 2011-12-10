@@ -1,5 +1,6 @@
 class DownloadsController < ApplicationController
   respond_to :html, :json
+  before_filter :authenticate_user!
   
   def index
     DownloadManager.update_status_all
@@ -16,6 +17,7 @@ class DownloadsController < ApplicationController
 
   def create
     @download = Download.new params[:download]
+    @download.user = current_user
     if @download.save
       redirect_to @download, notice: "Successfully created download."
     else
