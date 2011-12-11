@@ -9,6 +9,8 @@ gem 'parseconfig'
 gem 'formtastic'
 gem 'devise'
 
+gem 'whenever', :require => false
+
 group :assets do
   gem 'sass-rails',   '~> 3.1.5'
   gem 'coffee-rails', '~> 3.1.1'

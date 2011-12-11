@@ -55,8 +55,12 @@ module DownloadManager
       Download.to_add.find_each { |down| add down }
     end
     
+    def default_dir
+      Aria2Config.fetch(:dir, "/tmp")
+    end
+    
     def dir_for down
-      down.options["dir"] or File.join Aria2Config.fetch(:dir, "/tmp"), down.category.path("/")
+      down.options["dir"] or File.join default_dir, down.category.path("/")
     end
     
     def has_valid_gid? down
@@ -113,8 +117,29 @@ module DownloadManager
       down.save
     end
     
+    def cleanup_percent
+      Aria2Config.fetch(:cleanup_percent, "90%") rescue "90%"
+    end
+    
+    def disk_usage
+      `df #{default_dir}`.split[-2] rescue false
+    end
+    
     def cleanup_files
-      Download.to_clean.find_each { |down| remove_files down }
+      while disk_usage > cleanup_percent
+        remove_files Download.to_clean.first
+      end
+      true
+    rescue
+      false
+    end
+    
+    def limit
+      Aria2.limit rescue false
+    end
+    
+    def unlimit
+      Aria2.unlimit rescue false
     end
   end
 end
