@@ -17,7 +17,7 @@ class Download < ActiveRecord::Base
   scope :all_ordered, all_exist.order("status, completed_at DESC, created_at DESC")
   scope :to_add,      all_exist.where(status: :new)
   scope :to_check,    all_exist.where(status: [:added, :active])
-  scope :to_clean,    all_exist.where(got:    true)
+  scope :to_clean,    all_exist.where(got:    true).order("keep, got, completed_at")
   scope :completed,   all_exist.where(status: :completed).order("completed_at DESC")
   
   before_create do
