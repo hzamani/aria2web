@@ -1,5 +1,5 @@
-require './lib/aria2/server'
-require './lib/aria2/methods'
+require "#{Rails.root}/lib/aria2/server"
+require "#{Rails.root}/lib/aria2/methods"
 
 module Aria2
   class << self
