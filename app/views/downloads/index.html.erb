@@ -2,6 +2,7 @@
 
 <table>
   <tr>
+    <th>#</th>
     <th>Name</th>
     <th>Gid</th>
     <th>Status</th>
@@ -10,6 +11,7 @@
   </tr>
   <% for download in @downloads %>
     <tr>
+      <td><%= download.id %></td>
       <td><%= download.name %></td>
       <td><%= download.gid %></td>
       <td><%= download.status %></td>
