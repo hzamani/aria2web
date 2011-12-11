@@ -62,17 +62,18 @@ module DownloadManager
     def has_valid_gid? down
       same_session = (down.info["session"] == Aria2.this_session) rescue false
       
-      if same_session and not down.gid.nil?
-        true
-      else
-        down.gid = nil
-        down.info.delete "session"
-        false
-      end
+      (same_session and not down.gid.nil?) ? true : false
     end
     
     def update_status down, save=true
-      return unless has_valid_gid? down
+      unless has_valid_gid? down
+        down.gid    = nil
+        down.status = "error"
+        down.error  = "Session Changed"
+        down.info.delete "session"
+        down.save
+        return
+      end
       
       begin
         keys = ["status", "errorCode", "files"]

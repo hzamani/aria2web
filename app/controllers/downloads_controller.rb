@@ -19,7 +19,7 @@ class DownloadsController < ApplicationController
     @download = Download.new params[:download]
     @download.user = current_user
     if @download.save
-      redirect_to @download, notice: "Successfully created download."
+      redirect_to downloads_url, notice: "Successfully created download."
     else
       render action: 'new'
     end
