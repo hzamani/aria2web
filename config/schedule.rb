@@ -1,7 +1,7 @@
 # Customize to feet your needs
 # Don't forget to run `whenever -w' to write command to crontab
 
-set :output, File.expand_path('../log/cron.log', __FILE__)
+set :output, File.expand_path('../../log/cron.log', __FILE__)
 
 every 1.day, at: "8:00 am" do
   runner "DownloadManager.limit"
