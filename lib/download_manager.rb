@@ -116,9 +116,13 @@ module DownloadManager
       down.removed = true
       down.save
     end
+
+    def cleanup_policy
+      Aria2Config.fetch(:cleanup_policy, "space_usage")
+    end
     
     def cleanup_percent
-      Aria2Config.fetch(:cleanup_percent, "90%") rescue "90%"
+      Aria2Config.fetch(:cleanup_percent, "90%")
     end
     
     def disk_usage
@@ -126,8 +130,15 @@ module DownloadManager
     end
     
     def cleanup_files
-      while disk_usage > cleanup_percent
-        remove_files Download.to_clean.first
+      case cleanup_policy
+      when "space_usage"
+        while disk_usage > cleanup_percent
+          remove_files Download.to_clean.first
+        end
+      when "clean_got"
+        Download.where("got = 't' and keep = 'f'").find_each do |down|
+          remove_files down
+        end
       end
       true
     rescue

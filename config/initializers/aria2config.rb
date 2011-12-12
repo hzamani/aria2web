@@ -10,6 +10,8 @@ module Aria2Config
     def fetch name, default=nil
       name = name.to_s.gsub('_','-')
       config.params.fetch name, default
+    rescue
+      default
     end
   end
 end
