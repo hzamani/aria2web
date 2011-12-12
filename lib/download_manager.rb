@@ -86,6 +86,7 @@ module DownloadManager
         return
       end
       
+      files = files.map { |f| f["path"] }
       down.error = nil
       
       case down.status
@@ -93,10 +94,11 @@ module DownloadManager
         follow = status(down, ["followedBy"])["followedBy"]
         unless follow.nil?
           #FIXME: Dose it happen to have multiple followedBy gids?
-          down.gid = follow.first
+          down.gid    = follow.first
+          down.files += files
           update_status down, save
         else
-          down.files        = files.map { |f| f["path"] }
+          down.files       += files
           down.completed_at = Time.now
         end
       when "error"
