@@ -47,7 +47,9 @@ class Download < ActiveRecord::Base
   
   def name
     if info.has_key? "name"
-      info["name"] 
+      info["name"]
+    elsif not files.empty?
+      File.basename files.first
     elsif uri =~ /^https?:/u or uri =~ /^ftp:/u
       File.basename(uri).split('?').first
     elsif uri =~ /^magnet:/u

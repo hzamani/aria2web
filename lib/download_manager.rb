@@ -94,11 +94,11 @@ module DownloadManager
         follow = status(down, ["followedBy"])["followedBy"]
         unless follow.nil?
           #FIXME: Dose it happen to have multiple followedBy gids?
-          down.gid    = follow.first
-          down.files += files
+          down.gid   = follow.first
+          down.files = files + down.files
           update_status down, save
         else
-          down.files       += files
+          down.files        = files + down.files
           down.completed_at = Time.now
         end
       when "error"
