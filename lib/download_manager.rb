@@ -113,6 +113,8 @@ module DownloadManager
     end
     
     def remove_files down
+      return false if down.removed? or down.files.removed?
+
       FileUtils.rm_rf down.files
       down.files_removed = true
       down.removed = true
@@ -138,7 +140,7 @@ module DownloadManager
           remove_files Download.to_clean.first
         end
       when "clean_got"
-        Download.where("got = 't' and keep = 'f'").find_each do |down|
+        Download.all_got.find_each do |down|
           remove_files down
         end
       end
